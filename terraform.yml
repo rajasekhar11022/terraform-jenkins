@@ -2,7 +2,7 @@
 - hosts: localhost
   vars:
     state: present
-    s3_bucket: terraformravi
+    s3_bucket: terraformraviraja
     key: terraform.tfstate
     region: us-east-1
     app_env: dev
