@@ -6,14 +6,23 @@ pipeline{
   stages{
     stage('S3 - create bucket'){
       steps{
-        sh "ansible-playbook s3-bucket.yml"
+        script{
+          createS3Bucket('rajawipro-1212')
+        }
       }
     }
     stage('terraform init and apply - dev'){
       steps{
         sh returnStatus: true, script: 'terraform workspace new dev'
         sh "terraform init"
-        sh "ansible-playbook terraform.yml"
+        sh "terraform apply -var-file=dev.tfvars -auto-approve"
+      }
+    }
+    stage('terraform init and apply - prod'){
+      steps{
+        sh returnStatus: true, script: 'terraform workspace new dev'
+        sh "terraform init"
+        sh "terraform apply -var-file=prod.tfvars -auto-approve"
       }
     }
   }
