@@ -7,7 +7,7 @@ pipeline{
     stage('S3 - create bucket'){
       steps{
         script{
-          createS3Bucket('terraformraviraja')
+          createS3Bucket('rajawipro-1212')
         }
       }
     }
