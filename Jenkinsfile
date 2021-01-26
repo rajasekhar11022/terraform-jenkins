@@ -4,13 +4,15 @@ pipeline{
     PATH = "${PATH}:${getTerraformPath()}"
   }
   stages{
+
     stage('S3 - create bucket'){
       steps{
         script{
-          createS3Bucket('rajawipro-1212')
+          createS3Bucket('wiproraja-1212')
         }
       }
     }
+
     stage('terraform init and apply - dev'){
       steps{
         sh returnStatus: true, script: 'terraform workspace new dev'
@@ -18,6 +20,7 @@ pipeline{
         sh "terraform apply -var-file=dev.tfvars -auto-approve"
       }
     }
+
   }
 }
 
